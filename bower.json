@@ -1,0 +1,13 @@
+{
+  "name": "github-angular",
+  "description": "Github reading for angular js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ga-students",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.2.x",
+    "angular-route": "1.2.x",
+    "angular-loader": "1.2.x"
+  }
+}

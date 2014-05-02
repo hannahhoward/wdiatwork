@@ -1,0 +1,73 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+.user-logo img {
+  width: 150px;
+  height: 150px;
+}
+
+.ga-logo {
+  width: 200px;
+  height: 200px;
+}
+
+.users ul {
+  width: 390px;
+  height: 480px;
+  overflow: scroll;
+  list-style: none;
+  padding-left: 0px;
+  border-radius: 12px;
+  box-shadow: 3px 3px 10px grey;
+}
+
+.activity {
+  font-size: 125%;
+  border-radius: 12px;
+  box-shadow: 3px 3px 10px grey;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.user-name {
+  font-weight: bold;
+}
+.users ul li {
+
+  padding: 20px;
+  float: left;
+}
+
+.feeds ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
