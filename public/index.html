@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" x-ng-app="githubApp">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+  <div class="view-container">
+    <div class="container-fluid">
+
+      <h1><img class="ga-logo" src="img/ga_logo.jpg">What's Up With WDI 5/6</h1>
+
+      <div class="row" ng-controller="GithubUsersCtrl">
+
+        <div class="col-md-4 users">
+          <h2>Team Members:</h2>
+          <ul class="clearfix">
+            <li ng-repeat="user in users" ng-click="loadFeed(user)">
+              <div class="user-logo">
+                <img ng-src="{{user.avatar_url}}" />
+              </div>
+              <dl>
+                <dt>Login</dt>
+                <dl>{{user.login}}</dl>
+              </dl>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-8 feeds">
+          <h2>What they're up to:</h2>
+          <ul>
+            <li class="activity" ng-repeat="entry in entries">
+              <span class="user-name">{{entry.actor.login}}</span>
+              <span x-ng-if="entry.type=='IssuesEvent'">
+                {{entry.payload.action}} janky issue {{entry.payload.issue.title}} on
+              </span>
+              <span x-ng-if="entry.type=='PushEvent'">
+                pushed {{entry.payload.commits.length}} killer commits to
+              </span>
+              <span x-ng-if="entry.type=='CreateEvent'">
+                created a bomb-ass
+                  <span x-ng-if="entry.payload.ref_type=='repository'">repository</span>
+                  <span x-ng-if="entry.payload.ref_type=='branch'">branch {{entry.payload.ref}} on</span>
+              </span>
+              <span x-ng-if="entry.type=='WatchEvent'">
+                {{entry.payload.action}} watching
+              </span>
+              <span x-ng-if="entry.type=='ForkEvent'">
+                forked
+              </span>
+              <span x-ng-if="entry.type=='MemberEvent'">
+                {{entry.payload.action}} {{entry.payload.member.login}} to
+              </span>
+              <span x-ng-if="entry.type=='CommitCommentEvent'">
+                added commit comment <i>'{{entry.payload.comment.body}}'</i> to
+              </span>
+              <span class="repo"><a href="{{entry.repo.url.replace('api.github.com/repos', 'www.github.com')}}">{{entry.repo.name}}</a></span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+
+  <script src="libs/angular/angular.js"></script>
+  <script src="libs/angular-route/angular-route.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
