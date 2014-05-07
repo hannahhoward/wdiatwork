@@ -6,6 +6,6 @@ module.exports = {
     url: 'mongodb://localhost/wdiatwork_dev'
   },
   production: {
-    url: process.env['DATABASE_URL']
+    url: process.env['MONGOHQ_URL']
   }
 }
