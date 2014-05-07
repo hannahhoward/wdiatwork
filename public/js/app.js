@@ -125,9 +125,12 @@ githubApp.factory('SessionToken', ['$window', '$http', '$q', function($window, $
       $window.sessionStorage.token = token;
       SessionToken.dataDefer.resolve($window.sessionStorage.token);
     } else {
-      if (!$window.sessionStorage.token) {
+      if ($window.sessionStorage.token) {
+        SessionToken.dataDefer.resolve($window.sessionStorage.token);
+      } else {
         $window.location.href = "/login";
       }
+
     }
   };
 
