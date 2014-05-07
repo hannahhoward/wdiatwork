@@ -11,17 +11,16 @@
 
 
     app.get('/login',
-      passport.authenticate('github'));
+      passport.authenticate('github', { session: false}));
 
     app.get('/callback',
-      passport.authenticate('github', { failureRedirect: '/login' }),
-        function(req, res) {
-          res.writeHead(302, {
-            'Location': process.env['SERVER_URL']+'/#/index?token=' + req.user.token
-          });
-          res.end();
+      passport.authenticate('github', { session: false, failureRedirect: '/login' }),
+      function(req, res) {
+        res.writeHead(302, {
+          'Location': '/#/index?token=' + req.user.accessToken
         });
-    });
+        res.end();
+      });
 
     // frontend routes =========================================================
     // route to handle all angular requests

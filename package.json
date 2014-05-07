@@ -4,7 +4,8 @@
   "devDependencies": {
     "karma": "~0.10",
     "protractor": "~0.17.0",
-    "shelljs": "^0.2.6"
+    "shelljs": "^0.2.6",
+    "chai": ">= 0.0.0"
   },
   "scripts": {
     "postinstall": "bower install",

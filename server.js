@@ -14,22 +14,24 @@
 
   var port = process.env.PORT || 8080; // set our port
 
-  mongoose.connect(db.url); // connect to our mongoDB database (uncomment after you enter in your own credentials in config/db.js)
+  mongoose.connect(db[app.settings.env].url); // connect to our mongoDB database (uncomment after you enter in your own credentials in config/db.js)
+
+  var UserDB = require('./app/models/user')(mongoose, supergoose);
+  var GithubStrategy = require('passport-github').Strategy;
+  var BearerStrategy = require('passport-http-bearer').Strategy;
+
+  require('./app/authSetup')(passport, GithubStrategy, BearerStrategy, UserDB);
 
   app.configure(function() {
     app.use(express.static(__dirname + '/public'));   // set the static files location /public/img will be /img for users
     app.use(express.logger('dev'));           // log every request to the console
     app.use(express.bodyParser());            // have the ability to pull information from html in POST
     app.use(express.methodOverride());          // have the ability to simulate DELETE and PUT
+    app.use(passport.initialize());
   });
 
-  var UserDB = require('./app/models/user')(mongoose, supergoose);
-  var GithubStrategy = require('passport-github').Strategy;
-  var BearerStrategy = require('passport-http-bearer').Stategy;
-  require('./app/authSetup')(passport, GithubStrategy, BearerStrategy, UserDB);
-
   // routes ==================================================
-  require('./app/routes')(app); // configure our routes
+  require('./app/routes')(app, passport); // configure our routes
 
   // start app ===============================================
   app.listen(port);                   // startup our app at http://localhost:8080

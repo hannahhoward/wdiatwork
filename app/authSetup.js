@@ -6,12 +6,13 @@ module.exports = function(passport, GithubStrategy, BearerStrategy, UserDB) {
     clientSecret: process.env['GITHUB_SECRET'],
     callbackURL: (process.env['SERVER_URL']+'/callback')
     }, function(accessToken, refreshToken, profile, done) {
-      UserDB.findOrCreate({username: profile.id},
-        {email: profile.email},
-        {accessToken: accessToken}, function(err, user) {
+      UserDB.findOrCreate({username: profile.id,
+        email: profile.email,
+        accessToken: accessToken}, function(err, user) {
           done(err, user);
         });
-    }));
+    })
+  );
 
   passport.use('bearer', new BearerStrategy(function(token, done) {
     UserDB.findOne({accessToken: token}, function(err, user) {

@@ -28,7 +28,8 @@ module.exports = function (mongoose, supergoose) {
       default: '',
     },
     accessToken: {
-      type: String
+      type: String,
+      default: ''
     },
     email: {
       type: String,

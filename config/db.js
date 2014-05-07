@@ -1,3 +1,11 @@
 module.exports = {
-    url : process.env["DATABASE_URL"]
+  test: {
+    url: 'mongodb://localhost/wdiatwork_test'
+  },
+  development: {
+    url: 'mongodb://localhost/wdiatwork_dev'
+  },
+  production: {
+    url: process.env['DATABASE_URL']
+  }
 }
